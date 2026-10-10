@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1b1426">
+<title>Anh Nâng Cao 1, Bài B41: Halloween</title>
+<style>
+:root{
+--bg:#1b1426;--card:#f8f4fd;--ink:#231a30;--soft:#6a5c7a;--line:#ddd0ee;
+--pump:#f28a1d;--pump-d:#c76a07;--purple:#6f45b8;--purple-d:#4d2e86;
+--ok:#2c7a39;--ok-bg:#e1f3da;--bad:#b3342e;--bad-bg:#fde3df;
+--serif:"Times New Roman",Times,Georgia,serif;
+--sans:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:130px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.65;
+background-image:radial-gradient(circle at 12% 0,#3a2459 0,transparent 42%),radial-gradient(circle at 92% 100%,#33200f 0,transparent 38%);background-attachment:fixed}
+.hero{position:relative;overflow:hidden;text-align:center;color:#fbefd3;padding:40px 20px 24px;background:linear-gradient(180deg,#120c1c,#2a1a42)}
+.hero .web{position:absolute;left:0;top:0;width:120px;height:120px}
+.hero .moon{position:absolute;right:5%;top:16px;width:76px;height:76px;filter:drop-shadow(0 0 16px rgba(247,232,184,.45))}
+.hero .bat{position:absolute;color:#8a66c2;animation:fly 7s ease-in-out infinite}
+.b1{left:15%;top:24px;width:46px;height:23px}
+.b2{left:68%;top:70px;width:32px;height:16px;animation-delay:-3s}
+.b3{left:34%;top:92px;width:26px;height:13px;animation-delay:-5s}
+@keyframes fly{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-8px)}}
+.hero-in{position:relative}
+.hero p.eyebrow{font-family:var(--sans);font-size:14px;color:#ffb35c;margin:0 0 8px;letter-spacing:.5px}
+.hero h1{margin:0 0 10px;font-size:32px;line-height:1.25;color:#fff3da;font-weight:700}
+.hero p.sub{font-family:var(--sans);font-size:14px;color:#d9cdea;margin:0 auto;max-width:620px}
+.prow{display:flex;gap:16px;justify-content:center;margin-top:16px}
+.prow svg{width:36px;height:32px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(27,20,38,.96);border-bottom:2px solid var(--pump);padding:9px 14px;font-family:var(--sans)}
+.bar-row{max-width:940px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.nav{display:flex;gap:6px}
+.nav a{color:#ffd08a;border:1px solid #6b4f95;border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:600;text-decoration:none}
+.nav a:hover,.nav a:focus-visible{background:var(--pump);color:#2a1300;border-color:var(--pump);outline:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{background:#2f2342;color:#efe6fa;border:1px solid #4a3866;border-radius:999px;padding:5px 12px;font-size:12.5px;white-space:nowrap}
+.chip b{color:#ffb35c;font-variant-numeric:tabular-nums}
+button.chip{cursor:pointer;font-family:var(--sans)}
+button.chip:hover{border-color:var(--pump)}
+.track{max-width:940px;margin:8px auto 0;height:8px;background:#3a2b52;border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--pump),#ffc247);transition:width .4s}
+.plabel{max-width:940px;margin:4px auto 0;font-size:12px;color:#cbbfe0;text-align:right}
+.wrap{max-width:920px;margin:0 auto;padding:26px 16px 130px}
+.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--pump);border-radius:12px;padding:16px 18px;margin:0 0 12px;box-shadow:0 8px 20px -12px rgba(0,0,0,.7)}
+.card.right{border-left-color:var(--ok)}
+.card.wrong{border-left-color:var(--bad)}
+.guide h3,.box h3{margin:0 0 8px;font-size:20px;color:var(--purple-d)}
+.guide ul{margin:0;padding-left:20px}
+.guide li{font-family:var(--sans);font-size:14px;color:#41344f;margin-bottom:7px;line-height:1.6}
+.guide li b{color:var(--purple-d)}
+.wish{margin-top:12px;padding-top:10px;border-top:1px dashed #cdbbe6;font-weight:700;color:var(--purple-d);text-align:center;font-size:17px}
+.namebox label{display:block;font-family:var(--sans);font-weight:700;font-size:14px;color:var(--purple-d);margin-bottom:8px}
+.namebox label span{color:var(--bad)}
+.namebox input{width:100%;font:inherit;font-size:17px;padding:10px 12px;border:2px solid #cdbbe6;border-radius:8px;background:#fff}
+.namebox input:focus,.ti:focus,textarea:focus{outline:none;border-color:var(--pump);box-shadow:0 0 0 3px rgba(242,138,29,.25)}
+.namebox .msg{display:none;color:var(--bad);font-family:var(--sans);font-size:13px;font-weight:600;margin-top:8px}
+.namebox.err input{border-color:var(--bad)}
+.namebox.err .msg{display:block}
+.ph{margin:38px 0 10px;border-bottom:2px dashed #5a4380;padding-bottom:8px;display:flex;align-items:center;gap:10px}
+.ph h2{margin:0;font-size:23px;color:#ffd08a}
+.pi{width:30px;height:27px;flex:none}
+.ins{color:#d9cdea;font-family:var(--sans);font-size:13.5px;margin:0 0 14px}
+.ins b{color:#ffd08a}
+.passage p{margin:0 0 12px;text-align:justify;font-size:17.5px;line-height:1.75}
+.passage p:last-child{margin:0}
+.qt{display:flex;gap:10px;font-size:17.5px;margin-bottom:10px}
+.qn{flex:none;min-width:30px;height:30px;border-radius:50%;background:var(--purple);color:#fff;font-family:var(--sans);font-weight:700;font-size:13.5px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.blank{display:inline-block;min-width:72px;border-bottom:2px solid var(--ink);margin:0 3px;height:1em;vertical-align:-2px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opts.one{grid-template-columns:1fr}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;cursor:pointer;font-size:16.5px;touch-action:manipulation}
+.opt:hover{border-color:var(--pump);background:#fff4e2}
+.opt input{accent-color:var(--purple);width:17px;height:17px;margin:5px 0 0;flex:none}
+.ol{font-family:var(--sans);font-weight:700;color:var(--purple-d);flex:none}
+.opt.elim{opacity:.45;text-decoration:line-through}
+.opt.ok{background:var(--ok-bg);border-color:var(--ok)}
+.opt.bad{background:var(--bad-bg);border-color:var(--bad)}
+.fill-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:17px}
+.ti{font:inherit;font-size:17px;padding:7px 10px;border:2px solid #cdbbe6;border-radius:8px;background:#fff;flex:1 1 230px;min-width:0;max-width:100%}
+.ti.ok{background:var(--ok-bg);border-color:var(--ok)}
+.ti.bad{background:var(--bad-bg);border-color:var(--bad)}
+.mark{text-decoration:underline;text-decoration-color:var(--pump-d);text-decoration-thickness:2px;text-underline-offset:3px;background:rgba(242,138,29,.16);border-radius:3px;cursor:pointer}
+.hl{display:none;position:absolute;z-index:70;background:var(--purple-d);color:#fff;border:0;border-radius:999px;padding:8px 15px;font:700 13px var(--sans);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.sec-sub{font-family:var(--sans);font-size:13px;color:var(--soft);margin:0 0 12px}
+.vlist,.flags{display:flex;flex-wrap:wrap;gap:8px}
+.empty{font-family:var(--sans);font-size:13px;color:var(--soft);font-style:italic}
+.vchip{display:inline-flex;align-items:center;gap:4px;background:#fff1d9;border:1px solid #efc98a;border-radius:999px;padding:4px 6px 4px 13px;font-size:15px;color:#5a3a0a}
+.vx{border:0;background:none;color:var(--bad);font-size:18px;font-weight:700;cursor:pointer;padding:0 6px;line-height:1}
+.fl{font:700 13px var(--sans);min-width:38px;height:36px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--purple-d);cursor:pointer}
+.fl:hover{border-color:var(--pump)}
+.fl.on{background:var(--pump);border-color:var(--pump-d);color:#2a1300}
+.fl:disabled{cursor:not-allowed;opacity:.75}
+textarea{width:100%;min-height:96px;font:inherit;font-size:16.5px;padding:10px 12px;border:2px solid #cdbbe6;border-radius:8px;background:#fff;resize:vertical}
+.score{display:none;margin-top:30px;background:linear-gradient(160deg,#2b1c45,#1c1230);color:#fbefd3;border:2px solid var(--pump);border-radius:14px;padding:22px;font-family:var(--sans)}
+.score .big{font-family:var(--serif);font-size:48px;font-weight:700;color:#ffb35c;line-height:1.1}
+.score .rank{font-family:var(--serif);font-size:22px;color:#fff3da;margin:2px 0 12px}
+.score p{margin:5px 0;font-size:14.5px}
+.score table{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:13.5px}
+.score th,.score td{border-bottom:1px solid #4a3866;padding:6px 8px;text-align:left}
+.score th{color:#ffd08a}
+.rg{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.rc{font:700 13px var(--sans);min-width:46px;height:34px;border-radius:8px;cursor:pointer;border:2px solid}
+.rc.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.rc.bad{background:var(--bad-bg);border-color:var(--bad);border-style:dashed;color:var(--bad)}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(27,20,38,.96);border-top:2px solid var(--pump);padding:11px 14px;display:flex;justify-content:center}
+.btn{font:700 15px var(--sans);border:0;border-radius:999px;padding:12px 30px;cursor:pointer;background:var(--pump);color:#2a1300}
+.btn:hover{background:#ff9d3c}
+.btn.alt{background:#e3d8f3;color:#2d1a4d}
+.btn:focus-visible,.fl:focus-visible,.rc:focus-visible{outline:3px solid #ffd08a;outline-offset:2px}
+.status{display:none;position:fixed;left:50%;bottom:72px;transform:translateX(-50%);z-index:45;max-width:92vw;background:#fff;color:var(--ink);border:2px solid var(--purple);border-radius:10px;padding:9px 16px;font:600 13.5px var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.status.good{border-color:var(--ok);color:var(--ok)}
+.status.badc{border-color:var(--bad);color:var(--bad)}
+.mini{margin-left:8px;font:700 12.5px var(--sans);background:var(--purple-d);color:#fff;border:0;border-radius:999px;padding:5px 12px;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);background:var(--purple-d);color:#fff;font:600 13.5px var(--sans);padding:9px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:60;max-width:92vw;text-align:center}
+.toast.show{opacity:.97}
+.modal{display:none;position:fixed;inset:0;z-index:80;background:rgba(10,6,16,.7);align-items:center;justify-content:center;padding:20px}
+.mbox{background:var(--card);border-top:5px solid var(--pump);border-radius:12px;max-width:440px;width:100%;padding:22px;font-family:var(--sans)}
+.mbox h3{margin:0 0 8px;font-family:var(--serif);font-size:21px;color:var(--purple-d)}
+.mbox p{margin:0 0 10px;font-size:14px;color:#41344f}
+.mlist{max-height:170px;overflow:auto;background:#fff1d9;border:1px solid #efc98a;border-radius:8px;padding:9px 12px;font-size:13.5px;line-height:1.9}
+.mact{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+@media (max-width:620px){
+.hero h1{font-size:24px}
+.opts{grid-template-columns:1fr}
+.wrap{padding:20px 10px 130px}
+.card{padding:14px 13px}
+.hero .moon{width:56px;height:56px}
+.qt,.passage p{font-size:16.5px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<symbol id="pumpkin" viewBox="0 0 64 56">
+<path d="M30 10c0-5 3-8 8-9-1 4-2 7-5 9z" fill="#5b8a2e"/>
+<ellipse cx="32" cy="33" rx="29" ry="21" fill="#f28a1d"/>
+<ellipse cx="19" cy="33" rx="12" ry="21" fill="#e2740a"/>
+<ellipse cx="45" cy="33" rx="12" ry="21" fill="#e2740a"/>
+<ellipse cx="32" cy="33" rx="8" ry="21" fill="#f7a640"/>
+<path d="M17 28l8 2-5 7zM47 28l-8 2 5 7z" fill="#2a1608"/>
+<path d="M21 42l5-3 3 3 3-3 3 3 3-3 5 3q-11 8-22 0z" fill="#2a1608"/>
+</symbol>
+<symbol id="bat" viewBox="0 0 64 32">
+<path d="M32 8L36 14Q44 6 60 8Q54 14 54 22Q48 18 44 22Q40 18 36 22L32 26L28 22Q24 18 20 22Q16 18 10 22Q10 14 4 8Q20 6 28 14Z" fill="currentColor"/>
+</symbol>
+</defs>
+</svg>
+
+<header class="hero">
+<svg class="web" viewBox="0 0 120 120" fill="none" stroke="#cbbfe0" stroke-opacity=".35" stroke-width="1" aria-hidden="true"><path d="M0 0L120 0M0 0L110 45M0 0L85 85M0 0L45 110M0 0L0 120"/><path d="M30 0Q26 24 0 30M60 0Q52 50 0 60M90 0Q78 76 0 90"/></svg>
+<svg class="moon" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="32" fill="#f7e8b8"/><circle cx="28" cy="32" r="6" fill="#e6d49c"/><circle cx="50" cy="48" r="8" fill="#e6d49c"/><circle cx="46" cy="24" r="4" fill="#e6d49c"/></svg>
+<svg class="bat b1" viewBox="0 0 64 32" aria-hidden="true"><use href="#bat"/></svg>
+<svg class="bat b2" viewBox="0 0 64 32" aria-hidden="true"><use href="#bat"/></svg>
+<svg class="bat b3" viewBox="0 0 64 32" aria-hidden="true"><use href="#bat"/></svg>
+<div class="hero-in">
+<p class="eyebrow">Anh Nâng Cao 1, bài B41</p>
+<h1>Halloween Reading &amp; Advanced Comparisons</h1>
+<p class="sub">40 câu gồm Reading, Vocabulary và Key Word Transformation. Không giới hạn thời gian, làm lại bao nhiêu lần tùy em.</p>
+<div class="prow" aria-hidden="true"><svg viewBox="0 0 64 56"><use href="#pumpkin"/></svg><svg viewBox="0 0 64 56"><use href="#pumpkin"/></svg><svg viewBox="0 0 64 56"><use href="#pumpkin"/></svg></div>
+</div>
+</header>
+
+<div class="bar">
+<div class="bar-row">
+<nav class="nav" aria-label="Chuyển phần"><a href="#part1">Phần 1</a><a href="#part2">Phần 2</a><a href="#part3">Phần 3</a></nav>
+<div class="chips">
+<span class="chip">Lần làm <b id="att">1</b></span>
+<span class="chip">Thời gian <b id="timer">00:00</b></span>
+<span class="chip">Rời trang <b id="sw">0</b></span>
+<button type="button" class="chip" id="snd">Âm thanh: Bật</button>
+</div>
+</div>
+<div class="track"><div class="fill" id="fill"></div></div>
+<div class="plabel" id="plabel">0 câu đã làm</div>
+</div>
+
+<main class="wrap">
+<noscript><div class="card">Trang này cần bật JavaScript để làm bài.</div></noscript>
+
+<section class="card guide">
+<h3>Trước khi bắt đầu</h3>
+<ul>
+<li><b>Ghi họ tên</b> ở ô bên dưới. Tên này dùng để đếm xem em đang làm lần thứ mấy.</li>
+<li><b>Không giới hạn thời gian.</b> Hệ thống chỉ ghi lại em làm hết bao lâu để gửi cho giáo viên. Bài được tự lưu, lỡ tắt trang thì mở lại link để làm tiếp.</li>
+<li><b>Làm lại không giới hạn.</b> Sau khi nộp, bấm "Làm lại bài" để làm lần mới. Mỗi lần nộp đều được gửi cho giáo viên kèm số lần và thời gian làm.</li>
+<li>Bôi đen một từ chưa chắc nghĩa rồi bấm nút hiện ra để gạch chân. Với câu trắc nghiệm, bấm chuột phải (máy tính) hoặc chạm hai lần (điện thoại) vào đáp án để gạch bỏ.</li>
+<li>Sau khi nộp, câu đúng hiện màu xanh và câu sai hiện màu đỏ. Đáp án đúng không hiển thị, em tự làm lại để sửa.</li>
+</ul>
+<div class="wish">Chúc em làm bài thật tốt!</div>
+</section>
+
+<section class="card namebox" id="namebox">
+<label for="name">Họ và tên học sinh <span>*</span></label>
+<input type="text" id="name" autocomplete="name" placeholder="Nhập họ tên đầy đủ">
+<div class="msg">Em nhớ ghi họ tên trước khi nộp bài nhé.</div>
+</section>
+
+<div id="exam"></div>
+
+<div class="ph"><svg class="pi" viewBox="0 0 64 56" aria-hidden="true"><use href="#pumpkin"/></svg><h2>Trước khi nộp bài</h2></div>
+
+<section class="card box">
+<h3>Từ vựng em đã gạch chân</h3>
+<p class="sec-sub">Danh sách từ em chưa chắc nghĩa. Bấm dấu × hoặc bấm vào từ đã gạch chân trong đề để bỏ đánh dấu.</p>
+<div class="vlist" id="vlist"></div>
+</section>
+
+<section class="card box">
+<h3>Câu em muốn xem lại</h3>
+<p class="sec-sub">Bấm vào số câu em còn phân vân hoặc muốn được chữa kỹ.</p>
+<div class="flags" id="flags"></div>
+</section>
+
+<section class="card box">
+<h3>Nhắn thêm cho giáo viên</h3>
+<p class="sec-sub">Điều em chưa hiểu hoặc muốn luyện thêm. Không bắt buộc.</p>
+<textarea id="note" placeholder="Em muốn nhắn..."></textarea>
+</section>
+
+<section class="score" id="score" aria-live="polite"></section>
+</main>
+
+<div class="foot"><button type="button" class="btn" id="submit">Nộp bài</button></div>
+<div class="status" id="status"></div>
+<div class="toast" id="toast"></div>
+<button type="button" class="hl" id="hlbtn">Gạch chân từ này</button>
+
+<div class="modal" id="modal">
+<div class="mbox">
+<h3>Em còn câu chưa làm</h3>
+<p id="untxt"></p>
+<div class="mlist" id="unlist"></div>
+<div class="mact"><button type="button" class="btn alt" id="back">Quay lại làm bài</button><button type="button" class="btn" id="force">Vẫn nộp bài</button></div>
+</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var EXAM={"title": "Anh Nâng Cao 1, bài B41: Halloween Reading & Advanced Comparisons", "parts": [{"id": "1", "type": "mc", "label": "Part 1. Reading Comprehension (10 câu)", "ins": "Read the passage below and choose the best answer (A, B, C, or D) for each question.", "passage": ["Every autumn, millions of people around the world celebrate Halloween by dressing up in creative costumes and having fun with friends. While modern Halloween is synonymous with parties, costumes, and commercialism, the holiday actually began more than two thousand years ago. Its origins trace back to an ancient Celtic festival known as Samhain, which celebrated the end of summer. The Celts divided the year into two simple halves, the light season and the dark season, and marked the transition between them with a fire festival. Samhain was an important occasion to pay homage to loved ones who had passed away, as people believed the spirits of the dead could visit the living during this brief period. People carved lanterns by hollowing out vegetables like turnips to protect their homes, and they wore animal skins to disguise themselves from unfriendly spirits.", "In the first century, the Roman Empire conquered Celtic lands, and Christian customs began to spread. Over time, church leaders reframed pagan traditions into a Christian narrative so that local people could convert to the new faith more easily. Samhain was turned into All Hallows' Eve, the evening before All Saints' Day. Instead of making animal sacrifices, people gave food offerings to the poor. The traditional mischief and pranks continued, but people now attributed them to playful spirits rather than ancient gods. Through this gradual change, Halloween developed into a more secular celebration across the British Isles.", "When Protestant settlers arrived in North America in the seventeenth century, they repressed Halloween celebrations because they deemed them unsuitable. However, the situation changed dramatically in the middle of the nineteenth century, when a terrible potato famine forced a huge influx of Irish immigrants to move to the United States. These families brought their rich Halloween customs with them, which soon became popular in American towns.", "By the late nineteenth century, children were playing seemingly innocuous pranks on their neighbours on Halloween night. To dissuade young people from causing real damage, local communities began organizing safe neighbourhood parties with trick-or-treating. In the 1950s, big candy companies quickly got on the bandwagon, making Halloween a multi-billion-dollar market. Today, whether people prefer funny masks or gruesome monster costumes, Halloween has stood the test of time and proven that it is here to stay."], "items": [{"n": 1, "t": "What did the ancient festival of Samhain mainly celebrate?", "o": ["The return of warm spring weather", "The transition from the light season to the dark season", "The military victory of the Celts over the Romans", "The successful harvest of modern pumpkins"], "a": 1}, {"n": 2, "t": "The phrase \"pay homage to\" in paragraph 1 is closest in meaning to:", "o": ["ask for money from", "show deep respect for", "blame bad luck on", "make fun of"], "a": 1}, {"n": 3, "t": "Why did ancient Celts carve lanterns and wear animal skins during Samhain?", "o": ["To sell handmade costumes to Roman traders", "To protect their families and hide from unfriendly spirits", "To prepare food for the poor villagers", "To win prizes in local village competitions"], "a": 1}, {"n": 4, "t": "Why did church leaders reframe Celtic traditions into a Christian narrative?", "o": ["To stop people from gathering around evening fires", "To help local people accept the Christian faith more easily", "To make children buy commercial sweets", "To punish villagers who played innocent pranks"], "a": 1}, {"n": 5, "t": "According to paragraph 2, which change occurred as Samhain evolved into All Hallows' Eve?", "o": ["Food offerings to the poor took the place of animal sacrifices.", "People completely stopped wearing costumes in public.", "The holiday became strictly private and was banned in towns.", "Pranks were officially forbidden by national laws."], "a": 0}, {"n": 6, "t": "Why were Halloween traditions largely absent in early colonial America?", "o": ["Families did not have enough vegetables to carve lanterns.", "Protestant settlers disapproved of the holiday and repressed it.", "Native Americans introduced a different winter celebration.", "Children were required to work long hours on farms."], "a": 1}, {"n": 7, "t": "What event caused Halloween customs to spread widely across the United States?", "o": ["The invention of television shows in the twentieth century", "A large influx of Irish immigrants arriving in the mid-19th century", "A new law passed by the American government in the 1800s", "The rapid growth of Hollywood cinema studios"], "a": 1}, {"n": 8, "t": "Local communities promoted organized trick-or-treating in order to:", "o": ["teach children how to cook traditional pies", "persuade local grocery shops to lower sweet prices", "dissuade young people from playing destructive pranks", "raise municipal funds for public libraries"], "a": 2}, {"n": 9, "t": "The idiom \"got on the bandwagon\" in paragraph 4 suggests that candy companies:", "o": ["joined a growing popular trend to increase their sales", "donated their extra sweets to poor schools", "stopped producing sweets during the autumn months", "protested against the commercialism of Halloween"], "a": 0}, {"n": 10, "t": "What is the main idea of the final paragraph?", "o": ["Halloween has faded in popularity because of high sweet prices.", "Halloween was more meaningful when people carved turnips.", "Halloween has stood the test of time and become a permanent modern holiday.", "Scary movies are now more popular than trick-or-treating."], "a": 2}]}, {"id": "2", "type": "mc", "label": "Part 2. Vocabulary Mastery (20 câu)", "ins": "Choose the best option (A, B, C, or D) to complete each sentence.", "items": [{"n": 11, "t": "When the final whistle blew, thousands of excited fans <span class=\"blank\"><\/span> to celebrate their school's football championship.", "o": ["spilled into the streets", "stood the test of time", "showed up out of nowhere", "hollowed out the road"], "a": 0}, {"n": 12, "t": "For many young readers, the name Sherlock Holmes is virtually <span class=\"blank\"><\/span> brilliant detective work.", "o": ["capable of", "synonymous with", "grateful for", "fearful of"], "a": 1}, {"n": 13, "t": "The teacher warned the boys not to make <span class=\"blank\"><\/span> while she stepped out to collect the test papers.", "o": ["transition", "sacrifice", "mischief", "incentive"], "a": 2}, {"n": 14, "t": "As the warm spring weather arrived, the freezing snow quickly <span class=\"blank\"><\/span> green grass and bright flowers.", "o": ["gave way to", "paid homage to", "kept up with", "got along with"], "a": 0}, {"n": 15, "t": "Every year on National Day, thousands of citizens visit the monument to <span class=\"blank\"><\/span> fallen soldiers.", "o": ["attribute to", "pay homage to", "dissuade from", "reframe into"], "a": 1}, {"n": 16, "t": "Before placing the small candle inside, Peter helped his father <span class=\"blank\"><\/span> the ripe pumpkin.", "o": ["hollow out", "wipe away", "run into", "turn over"], "a": 0}, {"n": 17, "t": "<span class=\"blank\"><\/span> school regulations, all students are required to wear their uniforms on formal assembly days.", "o": ["Out of reach of", "In keeping with", "Far away from", "In place of"], "a": 1}, {"n": 18, "t": "What began as a <span class=\"blank\"><\/span> joke in the classroom ended up causing hurt feelings between two close friends.", "o": ["seemingly innocuous", "purely secular", "completely gruesome", "highly commercial"], "a": 0}, {"n": 19, "t": "The rainy forecast <span class=\"blank\"><\/span> our class <span class=\"blank\"><\/span> going on a picnic by the lake this weekend.", "o": ["repressed / about", "converted / to", "dissuaded / from", "incorporated / with"], "a": 2}, {"n": 20, "t": "Seeing the huge success of short-form videos, many educational channels quickly jumped <span class=\"blank\"><\/span> the bandwagon.", "o": ["on", "off", "over", "with"], "a": 0}, {"n": 21, "t": "Great fairy tales like Hans Christian Andersen's stories have <span class=\"blank\"><\/span> because each generation loves them.", "o": ["made mischief", "stood the test of time", "shown out of nowhere", "paid homage easily"], "a": 1}, {"n": 22, "t": "Digital learning platforms are no longer an experiment; teachers and students agree that they are <span class=\"blank\"><\/span>.", "o": ["nowhere near", "here to stay", "out of order", "off the record"], "a": 1}, {"n": 23, "t": "We were quietly cycling through the forest when a stray black cat <span class=\"blank\"><\/span> and crossed our path.", "o": ["gave way to fear", "showed up out of nowhere", "stood the test of time", "paid homage to us"], "a": 1}, {"n": 24, "t": "Many parents dislike the intense <span class=\"blank\"><\/span> of modern children's holidays, where buying toys seems more important than family time.", "o": ["commercialism", "contraction", "transition", "narrative"], "a": 0}, {"n": 25, "t": "In standard English grammar, the word \"won't\" is an informal <span class=\"blank\"><\/span> of \"will not\".", "o": ["transition", "contraction", "sacrifice", "franchise"], "a": 1}, {"n": 26, "t": "The <span class=\"blank\"><\/span> from primary school to middle school can feel intimidating for students who are not prepared.", "o": ["transition", "disparity", "influx", "merchandise"], "a": 0}, {"n": 27, "t": "Instead of feeling defeated by the difficult math problem, try to <span class=\"blank\"><\/span> it as a fun puzzle to solve.", "o": ["repress", "reframe", "hollow", "convert"], "a": 1}, {"n": 28, "t": "The young chess player <span class=\"blank\"><\/span> his fast progress <span class=\"blank\"><\/span> consistent practice every evening.", "o": ["attributed / to", "dissuaded / from", "converted / into", "incorporated / with"], "a": 0}, {"n": 29, "t": "The old wooden bridge across the stream was <span class=\"blank\"><\/span> unsafe after the flood, so pedestrians were stopped.", "o": ["reframed", "deemed", "hollowed", "converted"], "a": 1}, {"n": 30, "t": "During the hot July weekends, the coastal town welcomed a massive <span class=\"blank\"><\/span> of summer tourists.", "o": ["contraction", "influx", "narrative", "sacrifice"], "a": 1}]}, {"id": "3", "type": "tx", "label": "Part 3. Key Word Transformation (10 câu)", "ins": "Complete the second sentence so that it has a similar meaning to the first sentence, using the word given in bold. <b>Do not change the word given.<\/b> You must use between <b>three and five<\/b> words, including the word given.", "items": [{"n": 31, "t": "The movie remake is much less exciting than the original film. <b>(NEARLY)<\/b>", "pre": "The movie remake is ", "post": " the original film.", "k": ["not nearly as exciting as"]}, {"n": 32, "t": "Without any doubt, Mount Everest is the highest mountain in the world. <b>(FAR)<\/b>", "pre": "Mount Everest is ", "post": " mountain in the world.", "k": ["by far the highest"]}, {"n": 33, "t": "The population of Tokyo is considerably larger than the population of Paris. <b>(THAT)<\/b>", "pre": "The population of Tokyo is considerably larger ", "post": " Paris.", "k": ["than that of"]}, {"n": 34, "t": "Mark felt tired rather than angry after the long debate. <b>(MUCH)<\/b>", "pre": "Mark felt not ", "post": " tired after the long debate.", "k": ["so much angry as"]}, {"n": 35, "t": "When you practice solving English exercises more often, they become easier. <b>(THE)<\/b>", "pre": "The more often you practice solving English exercises, ", "post": " become.", "k": ["the easier they"]}, {"n": 36, "t": "The new school library is two times larger than the old one. <b>(TWICE)<\/b>", "pre": "The new school library is ", "post": " the old one.", "k": ["twice the size of"]}, {"n": 37, "t": "The sound quality of these modern speakers is much better than the old set. <b>(SUPERIOR)<\/b>", "pre": "The sound quality of these modern speakers is vastly ", "post": " the old set.", "k": ["superior to that of"]}, {"n": 38, "t": "Two candidates applied for the monitor position, and Sarah is the more qualified candidate. <b>(TWO)<\/b>", "pre": "Of the ", "post": " , Sarah is the more qualified.", "k": ["two candidates"]}, {"n": 39, "t": "This desktop computer costs two times as much as that portable laptop. <b>(EXPENSIVE)<\/b>", "pre": "This desktop computer is twice ", "post": " that portable laptop.", "k": ["as expensive as"]}, {"n": 40, "t": "The morning weather today is just a little cooler than it was yesterday. <b>(SLIGHTLY)<\/b>", "pre": "The morning weather today is ", "post": " it was yesterday.", "k": ["slightly cooler than"]}]}]};
+var MAIL="ddangminh1905@gmail.com";
+var K={st:"anc1_b41_state",hi:"anc1_b41_hist",nm:"anc1_b41_name"};
+var mem={};
+var store={
+get:function(k){var v=null;try{var r=localStorage.getItem(k);v=r?JSON.parse(r):null;}catch(e){}return v||mem[k]||null;},
+set:function(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+};
+function $(id){return document.getElementById(id);}
+function h(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.innerHTML=x;return e;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function norm(s){return String(s||"").toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[.,!?;:"]/g,"").replace(/\s+/g," ").trim();}
+function nkey(s){return String(s||"").toLowerCase().replace(/đ/g,"d").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();}
+function p2(n){return n<10?"0"+n:""+n;}
+function tm(s){return p2(Math.floor(s/60))+":"+p2(s%60);}
+function tmVN(s){return Math.floor(s/60)+" phút "+(s%60)+" giây";}
+function dt(ts){var d=new Date(ts);return p2(d.getDate())+"/"+p2(d.getMonth()+1)+"/"+d.getFullYear()+" "+p2(d.getHours())+":"+p2(d.getMinutes());}
+
+var area=$("exam"),reg=[],locked=false,secs=0,sw=0,startTs=Date.now(),sub=null,vocab=[],flags=[],done={},soundOn=true,ctx=null,away=false;
+
+/* ---------- render ---------- */
+function render(){
+area.innerHTML="";reg.length=0;
+EXAM.parts.forEach(function(p){
+area.appendChild(h("div","ph",'<svg class="pi" viewBox="0 0 64 56" aria-hidden="true"><use href="#pumpkin"/></svg><h2 id="part'+p.id+'">'+p.label+'</h2>'));
+if(p.ins)area.appendChild(h("p","ins",p.ins));
+if(p.passage)area.appendChild(h("div","card passage",p.passage.map(function(x){return "<p>"+x+"</p>";}).join("")));
+p.items.forEach(function(it){
+var c=h("div","card q");c.id="q"+it.n;
+var x='<div class="qt"><span class="qn">'+it.n+'</span><span>'+it.t+'</span></div>';
+if(p.type==="mc"){
+var lg=it.o.some(function(o){return o.length>34;});
+x+='<div class="opts'+(lg?" one":"")+'">'+it.o.map(function(o,i){return '<label class="opt"><input type="radio" name="m'+it.n+'" value="'+i+'"><span class="ol">'+"ABCD".charAt(i)+'.</span><span>'+esc(o)+'</span></label>';}).join("")+'</div>';
+reg.push({n:it.n,part:p.id,kind:"mc",a:it.a,o:it.o});
+}else{
+x+='<div class="fill-row"><span>'+esc(it.pre)+'</span><input type="text" class="ti" id="a'+it.n+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Câu '+it.n+'"><span>'+esc(it.post)+'</span></div>';
+reg.push({n:it.n,part:p.id,kind:"tx",k:it.k});
+}
+c.innerHTML=x;area.appendChild(c);
+});
+});
+}
+function val(it){
+if(it.kind==="mc"){var c=document.querySelector('input[name="m'+it.n+'"]:checked');return c?+c.value:null;}
+var e=$("a"+it.n);return e?e.value:"";
+}
+function has(it){var v=val(it);return it.kind==="mc"?v!==null:v.trim()!=="";}
+function ok(it){
+var v=val(it);if(it.kind==="mc")return v===it.a;
+var x=norm(v);return it.k.some(function(k){return norm(k)===x;});
+}
+function result(){
+var r={sc:0,tot:reg.length,p:{}};
+EXAM.parts.forEach(function(p){r.p[p.id]={s:0,t:0};});
+reg.forEach(function(it){var o=r.p[it.part];o.t++;if(ok(it)){o.s++;r.sc++;}});
+return r;
+}
+
+/* ---------- sound and toast ---------- */
+function beep(f,d,t,v,w){
+if(!soundOn)return;
+try{var C=window.AudioContext||window.webkitAudioContext;if(!C)return;ctx=ctx||new C();
+var t0=ctx.currentTime+(w||0),o=ctx.createOscillator(),g=ctx.createGain();
+o.type=t||"sine";o.frequency.setValueAtTime(f,t0);g.gain.setValueAtTime(v||.1,t0);
+g.gain.exponentialRampToValueAtTime(.001,t0+d);o.connect(g);g.connect(ctx.destination);o.start(t0);o.stop(t0+d+.03);}catch(e){}
+}
+function pop(){beep(740,.07,"triangle",.08);}
+function ting(){beep(988,.14,"sine",.1);beep(1319,.18,"sine",.08,.09);}
+function spooky(){[523,466,392,466,587].forEach(function(f,i){beep(f,.22,"triangle",.1,i*.15);});}
+var tt=null;
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("show");},2200);}
+$("snd").addEventListener("click",function(){soundOn=!soundOn;this.textContent="Âm thanh: "+(soundOn?"Bật":"Tắt");store.set("anc1_b41_snd",soundOn?1:0);if(soundOn)pop();});
+
+/* ---------- progress ---------- */
+function progress(quiet){
+var n=0;reg.forEach(function(it){if(has(it))n++;});
+var p=reg.length?Math.round(n*100/reg.length):0;
+$("fill").style.width=p+"%";
+$("plabel").textContent=n+" / "+reg.length+" câu đã làm ("+p+"%)";
+EXAM.parts.forEach(function(pt){
+if(done[pt.id])return;
+var its=reg.filter(function(i){return i.part===pt.id;});
+if(its.length&&its.every(has)){done[pt.id]=1;if(!quiet&&!locked){toast("Em đã làm xong Phần "+pt.id);ting();}}
+});
+}
+
+/* ---------- attempts ---------- */
+function hist(){return store.get(K.hi)||{};}
+function mine(name){return hist()[nkey(name)]||[];}
+function attNo(){return locked&&sub?sub.att:mine($("name").value).length+1;}
+function refreshAtt(){$("att").textContent=attNo();}
+function setBtn(){$("submit").textContent=locked?"Làm lại bài (lần "+((sub?sub.att:0)+1)+")":"Nộp bài";}
+
+/* ---------- save and restore ---------- */
+function save(){
+var a={};reg.forEach(function(it){a[it.n]=val(it);});
+store.set(K.st,{name:$("name").value,ans:a,note:$("note").value,flags:flags,vocab:vocab,secs:secs,sw:sw,startTs:startTs,locked:locked,sub:sub});
+}
+var wasLocked=false;
+function restore(){
+var s=store.get(K.st);
+$("name").value=(s&&s.name)||store.get(K.nm)||"";
+if(store.get("anc1_b41_snd")===0){soundOn=false;$("snd").textContent="Âm thanh: Tắt";}
+if(!s)return;
+reg.forEach(function(it){
+var v=s.ans&&s.ans[it.n];
+if(v===null||v===undefined||v==="")return;
+if(it.kind==="mc"){var r=document.querySelector('input[name="m'+it.n+'"][value="'+v+'"]');if(r)r.checked=true;}
+else{var e=$("a"+it.n);if(e)e.value=v;}
+});
+$("note").value=s.note||"";flags=s.flags||[];vocab=s.vocab||[];
+secs=s.secs||0;sw=s.sw||0;startTs=s.startTs||Date.now();sub=s.sub||null;wasLocked=!!s.locked;
+}
+
+/* ---------- elimination ---------- */
+function elim(l){
+if(locked||!l)return;
+var on=l.classList.toggle("elim");
+if(on){var r=l.querySelector("input");if(r&&r.checked){r.checked=false;progress(1);save();}}
+pop();
+}
+area.addEventListener("dblclick",function(e){var l=e.target.closest(".opt");if(l){e.preventDefault();elim(l);}});
+document.addEventListener("contextmenu",function(e){
+e.preventDefault();
+var l=e.target.closest&&e.target.closest(".opt");
+if(l)elim(l);else toast("Chức năng này đã tắt khi làm bài");
+});
+["copy","cut"].forEach(function(ev){document.addEventListener(ev,function(e){
+var t=e.target&&e.target.tagName;if(t==="INPUT"||t==="TEXTAREA")return;
+e.preventDefault();toast("Chức năng sao chép đã tắt khi làm bài");
+});});
+
+/* ---------- vocabulary underline ---------- */
+var hb=$("hlbtn"),raf=0,pend=null;
+function hideHl(){hb.style.display="none";pend=null;}
+function updHl(){
+raf=0;
+if(locked){hideHl();return;}
+var s=window.getSelection();
+if(!s||s.isCollapsed||!s.rangeCount){hideHl();return;}
+var t=s.toString().trim();
+if(!t||t.length>60){hideHl();return;}
+var r=s.getRangeAt(0),n=r.commonAncestorContainer,el=n.nodeType===1?n:n.parentElement;
+if(!el||!el.closest||!el.closest("#exam .card")){hideHl();return;}
+var b=r.getBoundingClientRect();
+if(!b.width&&!b.height){hideHl();return;}
+hb.style.display="block";
+hb.style.left=Math.max(8,Math.min(b.left+window.scrollX,window.scrollX+document.documentElement.clientWidth-170))+"px";
+hb.style.top=Math.max(8,b.top+window.scrollY-44)+"px";
+pend={r:r.cloneRange(),t:t};
+}
+document.addEventListener("selectionchange",function(){if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(updHl);});
+hb.addEventListener("pointerdown",function(e){e.preventDefault();});
+hb.addEventListener("mousedown",function(e){e.preventDefault();});
+hb.addEventListener("click",function(){
+if(!pend)return;
+if(pend.r.cloneContents().querySelector("input,textarea,.mark")){toast("Em chọn một từ hoặc cụm từ ngắn nhé");hideHl();return;}
+var m=document.createElement("span");m.className="mark";m.title="Bấm để bỏ gạch chân";
+try{pend.r.surroundContents(m);}catch(e){toast("Em chọn cụm từ ngắn hơn, trong cùng một dòng nhé");hideHl();return;}
+if(vocab.indexOf(pend.t)<0)vocab.push(pend.t);
+renderV();window.getSelection().removeAllRanges();hideHl();save();
+});
+function renderV(){
+var b=$("vlist");
+if(!vocab.length){b.innerHTML='<span class="empty">Chưa có từ nào được đánh dấu.</span>';return;}
+b.innerHTML="";
+vocab.forEach(function(w){
+var c=h("span","vchip");c.appendChild(document.createTextNode(w));
+var x=h("button","vx","\u00d7");x.type="button";x.setAttribute("aria-label","Bỏ đánh dấu "+w);
+x.addEventListener("click",function(){if(!locked)rmV(w);});
+c.appendChild(x);b.appendChild(c);
+});
+}
+function unwrap(s){var p=s.parentNode;while(s.firstChild)p.insertBefore(s.firstChild,s);p.removeChild(s);p.normalize();}
+function rmV(w){
+vocab=vocab.filter(function(x){return x!==w;});
+area.querySelectorAll(".mark").forEach(function(s){if(s.textContent.trim()===w)unwrap(s);});
+renderV();save();
+}
+area.addEventListener("click",function(e){
+var s=e.target.closest&&e.target.closest(".mark");
+if(s&&!locked){e.preventDefault();rmV(s.textContent.trim());}
+});
+
+/* ---------- flags ---------- */
+function buildFlags(){
+var g=$("flags");g.innerHTML="";
+reg.forEach(function(it){
+var b=h("button","fl",String(it.n));b.type="button";
+if(flags.indexOf(it.n)>-1)b.classList.add("on");
+b.addEventListener("click",function(){
+if(locked)return;
+var i=flags.indexOf(it.n);
+if(i>-1){flags.splice(i,1);b.classList.remove("on");}else{flags.push(it.n);b.classList.add("on");}
+save();
+});
+g.appendChild(b);
+});
+}
+
+/* ---------- timer and leaving the page ---------- */
+setInterval(function(){
+if(locked||document.hidden)return;
+secs++;$("timer").textContent=tm(secs);
+if(secs%5===0)save();
+},1000);
+function leave(){if(locked||away)return;away=true;sw++;$("sw").textContent=sw;save();}
+function back(){away=false;}
+document.addEventListener("visibilitychange",function(){if(document.hidden)leave();else back();});
+window.addEventListener("blur",leave);
+window.addEventListener("focus",back);
+window.addEventListener("beforeunload",save);
+
+/* ---------- inputs ---------- */
+area.addEventListener("change",function(){pop();progress();save();});
+area.addEventListener("input",function(){progress();save();});
+$("note").addEventListener("input",save);
+$("name").addEventListener("input",function(){
+store.set(K.nm,this.value);
+$("namebox").classList.remove("err");
+refreshAtt();save();
+});
+
+/* ---------- grading and lock ---------- */
+function lock(on){
+document.querySelectorAll("#exam input,#exam textarea").forEach(function(i){i.disabled=on;});
+$("note").disabled=on;$("name").disabled=on;
+document.querySelectorAll(".fl").forEach(function(b){b.disabled=on;});
+}
+function mark(){
+reg.forEach(function(it){
+var c=$("q"+it.n),g=ok(it);
+c.classList.remove("right","wrong");c.classList.add(g?"right":"wrong");
+if(it.kind==="mc"){var r=c.querySelector("input:checked");if(r)r.closest(".opt").classList.add(g?"ok":"bad");}
+else{$("a"+it.n).classList.add(g?"ok":"bad");}
+});
+}
+function showScore(r){
+var name=$("name").value.trim(),list=mine(name),best=0;
+list.forEach(function(x){if(x.sc>best)best=x.sc;});
+var pct=r.sc/r.tot;
+var rank=pct>=.9?"Phù thủy tối cao":pct>=.75?"Pháp sư giỏi":pct>=.5?"Dơi con chăm chỉ":"Bóng ma tập sự";
+var parts=EXAM.parts.map(function(p){return "Phần "+p.id+": "+r.p[p.id].s+" / "+r.p[p.id].t;}).join(", ");
+var rows=list.map(function(x){return "<tr><td>Lần "+x.n+"</td><td>"+x.sc+" / "+x.tot+"</td><td>"+tmVN(x.secs)+"</td><td>"+dt(x.ts)+"</td></tr>";}).join("");
+var chips=reg.map(function(it){var g=ok(it);return '<button type="button" class="rc '+(g?"ok":"bad")+'" data-n="'+it.n+'" title="Câu '+it.n+(g?" đúng":" sai")+'">'+it.n+(g?"":" \u00d7")+'</button>';}).join("");
+var B=$("score");
+B.innerHTML='<div class="big">'+r.sc+' / '+r.tot+'</div><div class="rank">'+rank+'</div>'
++'<p>'+parts+'</p>'
++'<p>Lần làm: '+sub.att+'. Thời gian làm bài: '+tmVN(secs)+'. Điểm cao nhất của em: '+best+' / '+r.tot+'.</p>'
++'<p>Bấm vào số câu để xem lại. Ô viền nét đứt có dấu \u00d7 là câu sai hoặc bỏ trống.</p>'
++'<div class="rg">'+chips+'</div>'
++'<table><thead><tr><th>Lần</th><th>Điểm</th><th>Thời gian làm</th><th>Nộp lúc</th></tr></thead><tbody>'+rows+'</tbody></table>'
++'<p style="margin-top:14px"><button type="button" class="btn" id="retry">Làm lại bài (lần '+(sub.att+1)+')</button></p>';
+B.style.display="block";
+B.querySelectorAll(".rc").forEach(function(b){b.addEventListener("click",function(){
+var t=$("q"+b.getAttribute("data-n"));
+if(t){t.scrollIntoView({behavior:"smooth",block:"center"});t.style.boxShadow="0 0 0 4px #ffb35c";setTimeout(function(){t.style.boxShadow="";},1600);}
+});});
+$("retry").addEventListener("click",retake);
+}
+function finish(rest){
+var name=$("name").value.trim();
+locked=true;lock(true);hideHl();mark();
+var r=result();
+if(!rest){
+var H=hist(),key=nkey(name),list=H[key]||[],att=list.length+1,end=Date.now();
+list.push({n:att,sc:r.sc,tot:r.tot,secs:secs,ts:end});H[key]=list;store.set(K.hi,H);
+sub={att:att,endTs:end,sent:false};
+}else if(!sub){sub={att:Math.max(1,mine(name).length),endTs:Date.now(),sent:true};}
+save();showScore(r);setBtn();refreshAtt();
+if(!rest){spooky();send();}
+else if(!sub.sent){setStatus("Kết quả lần "+sub.att+" chưa được gửi cho giáo viên.","badc",true);}
+}
+function retake(){
+locked=false;sub=null;secs=0;sw=0;away=false;startTs=Date.now();vocab=[];flags=[];done={};
+$("note").value="";$("score").style.display="none";$("status").style.display="none";
+render();buildFlags();renderV();lock(false);progress(1);
+$("timer").textContent="00:00";$("sw").textContent="0";
+refreshAtt();setBtn();save();
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ---------- submit ---------- */
+function onSubmit(){
+if(locked){retake();return;}
+var n=$("name");
+if(!n.value.trim()){$("namebox").classList.add("err");n.focus();n.scrollIntoView({behavior:"smooth",block:"center"});return;}
+var un=reg.filter(function(it){return !has(it);});
+if(un.length){
+$("unlist").innerHTML=un.map(function(i){return "Phần "+i.part+", câu "+i.n;}).join("<br>");
+$("untxt").textContent="Em còn "+un.length+" câu chưa làm:";
+$("modal").style.display="flex";
+}else finish(false);
+}
+$("submit").addEventListener("click",onSubmit);
+$("back").addEventListener("click",function(){$("modal").style.display="none";});
+$("force").addEventListener("click",function(){$("modal").style.display="none";finish(false);});
+
+/* ---------- email to teacher ---------- */
+function L(i){return "ABCD".charAt(i);}
+function shown(it){var v=val(it);if(it.kind==="mc")return v===null?"(chưa trả lời)":L(v)+". "+it.o[v];return v.trim()?v.trim():"(chưa trả lời)";}
+function right(it){return it.kind==="mc"?L(it.a)+". "+it.o[it.a]:it.k[0];}
+function body(){
+var r=result(),name=$("name").value.trim(),list=mine(name),o=[];
+o.push("Học sinh: "+name);
+o.push("Lần nộp: lần "+sub.att);
+o.push("Đề: "+EXAM.title);
+o.push("Điểm: "+r.sc+" / "+r.tot+" ("+EXAM.parts.map(function(p){return "Phần "+p.id+": "+r.p[p.id].s+"/"+r.p[p.id].t;}).join(", ")+")");
+o.push("Thời gian làm bài (tính lúc đang mở trang): "+tmVN(secs));
+o.push("Tổng thời gian từ lúc mở bài đến lúc nộp: "+tmVN(Math.max(0,Math.round((sub.endTs-startTs)/1000))));
+o.push("Nộp lúc: "+dt(sub.endTs));
+o.push("Số lần rời khỏi trang: "+sw);
+o.push("");
+o.push("=== CÁC LẦN NỘP CỦA HỌC SINH NÀY (trên thiết bị này) ===");
+list.forEach(function(x){o.push("Lần "+x.n+": "+x.sc+"/"+x.tot+", làm "+tmVN(x.secs)+", nộp lúc "+dt(x.ts));});
+o.push("");
+EXAM.parts.forEach(function(p){
+o.push("=== PHẦN "+p.id+" ===");
+reg.filter(function(i){return i.part===p.id;}).forEach(function(it){
+o.push("Câu "+it.n+": "+shown(it)+(ok(it)?" [đúng]":" [sai, đáp án: "+right(it)+"]"));
+});
+o.push("");
+});
+o.push("(Phần 3 được chấm tự động theo đáp án trong đề. Thầy xem lại các câu [sai] nếu học sinh viết đáp án khác nhưng vẫn đúng.)");
+o.push("");
+o.push("=== CÂU HỌC SINH MUỐN XEM LẠI ===");
+o.push(flags.length?flags.slice().sort(function(a,b){return a-b;}).map(function(n){return "Câu "+n;}).join(", "):"(không có)");
+o.push("");
+o.push("=== TỪ VỰNG HỌC SINH GẠCH CHÂN ===");
+o.push(vocab.length?vocab.join(", "):"(không có)");
+o.push("");
+o.push("=== NHẮN THÊM CHO GIÁO VIÊN ===");
+o.push($("note").value.trim()||"(không có)");
+return o.join("\n");
+}
+function setStatus(m,c,retry){
+var s=$("status");s.className="status "+(c||"");
+s.innerHTML=esc(m)+(retry?' <button type="button" class="mini" id="resend">Gửi lại</button>':"");
+s.style.display="block";
+if(retry)$("resend").addEventListener("click",send);
+if(c==="good")setTimeout(function(){s.style.display="none";},7000);
+}
+function send(){
+var name=$("name").value.trim(),r=result();
+setStatus("Đang gửi kết quả cho giáo viên...","");
+fetch("https://formsubmit.co/ajax/"+MAIL,{
+method:"POST",
+headers:{"Content-Type":"application/json","Accept":"application/json"},
+body:JSON.stringify({
+_subject:"[B41 ANC1] "+name+" | Lần "+sub.att+" | "+r.sc+"/"+r.tot+" | "+tm(secs),
+_captcha:"false",
+name:name,
+attempt:"Lần "+sub.att,
+score:r.sc+" / "+r.tot,
+time_spent:tmVN(secs),
+answers:body()
+})
+}).then(function(x){return x.json();}).then(function(d){
+if(d&&d.success!==false&&d.success!=="false"){sub.sent=true;save();setStatus("Kết quả đã được gửi cho giáo viên.","good");}
+else throw new Error("fail");
+}).catch(function(){setStatus("Chưa gửi được kết quả. Em kiểm tra mạng rồi bấm gửi lại nhé.","badc",true);});
+}
+
+/* ---------- init ---------- */
+render();restore();buildFlags();renderV();progress(1);
+$("timer").textContent=tm(secs);$("sw").textContent=sw;
+refreshAtt();setBtn();
+if(wasLocked)finish(true);
+})();
+</script>
+</body>
+</html>
