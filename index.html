@@ -57,6 +57,7 @@ button.chip:hover{border-color:var(--pump)}
 .namebox label span{color:var(--bad)}
 .namebox input{width:100%;font:inherit;font-size:17px;padding:10px 12px;border:2px solid #cdbbe6;border-radius:8px;background:#fff}
 .namebox input:focus,.ti:focus,textarea:focus{outline:none;border-color:var(--pump);box-shadow:0 0 0 3px rgba(242,138,29,.25)}
+.namebox .hint{font-family:var(--sans);font-size:12.5px;color:var(--soft);font-style:italic;margin-top:8px}
 .namebox .msg{display:none;color:var(--bad);font-family:var(--sans);font-size:13px;font-weight:600;margin-top:8px}
 .namebox.err input{border-color:var(--bad)}
 .namebox.err .msg{display:block}
@@ -186,19 +187,22 @@ textarea{width:100%;min-height:96px;font:inherit;font-size:16.5px;padding:10px 1
 <section class="card guide">
 <h3>Trước khi bắt đầu</h3>
 <ul>
-<li><b>Ghi họ tên</b> ở ô bên dưới. Tên này dùng để đếm xem em đang làm lần thứ mấy.</li>
-<li><b>Không giới hạn thời gian.</b> Hệ thống chỉ ghi lại em làm hết bao lâu để gửi cho giáo viên. Bài được tự lưu, lỡ tắt trang thì mở lại link để làm tiếp.</li>
-<li><b>Làm lại không giới hạn.</b> Sau khi nộp, bấm "Làm lại bài" để làm lần mới. Mỗi lần nộp đều được gửi cho giáo viên kèm số lần và thời gian làm.</li>
-<li>Bôi đen một từ chưa chắc nghĩa rồi bấm nút hiện ra để gạch chân. Với câu trắc nghiệm, bấm chuột phải (máy tính) hoặc chạm hai lần (điện thoại) vào đáp án để gạch bỏ.</li>
-<li>Sau khi nộp, câu đúng hiện màu xanh và câu sai hiện màu đỏ. Đáp án đúng không hiển thị, em tự làm lại để sửa.</li>
+<li>Bài <b>không giới hạn thời gian</b> làm bài, các em cứ yên tâm làm thật kỹ, không cần vội. Bài cũng được tự động lưu trên máy, lỡ tay tắt thì vào lại link làm tiếp bình thường nha.</li>
+<li><b>Bắt buộc ghi họ tên</b> ở ô bên dưới trước khi nộp bài. Tên này để anh đếm xem em đang làm lần thứ mấy, nên các lần làm lại nhớ ghi giống nhau nha.</li>
+<li>Em được <b>làm lại bao nhiêu lần tùy thích</b>. Nộp xong, bấm "Làm lại bài" để làm lần mới. Mỗi lần nộp đều gửi cho anh kèm lần thứ mấy và em làm hết bao lâu, nên làm nghiêm túc nha mấy đứa.</li>
+<li>Gặp từ nào chưa chắc nghĩa, em <b>bôi đen từ đó</b> và bấm nút hiện ra để gạch chân đánh dấu lại, buổi sau anh chữa kỹ hơn nha.</li>
+<li>Với câu trắc nghiệm, em <b>bấm chuột phải</b> (máy tính) hoặc <b>chạm hai lần liên tiếp</b> (điện thoại) vào đáp án em muốn loại để gạch nó đi, đỡ phải nhớ trong đầu là mình đã loại đáp án nào rồi.</li>
+<li>Sau khi <b>nộp bài</b>, câu đúng hiện <b>màu xanh</b>, câu sai hiện <b>màu đỏ</b> ngay trên bài làm, kèm bảng tổng hợp để em bấm vào xem lại từng câu sai. Đáp án đúng anh không hiện sẵn, em tự làm lại để sửa nha.</li>
+<li>Cuối bài có mục để em <b>đánh dấu câu muốn xem lại</b> và nhắn anh điều em muốn học thêm.</li>
 </ul>
-<div class="wish">Chúc em làm bài thật tốt!</div>
+<div class="wish">Chúc em làm bài thật tốt nha!</div>
 </section>
 
 <section class="card namebox" id="namebox">
 <label for="name">Họ và tên học sinh <span>*</span></label>
 <input type="text" id="name" autocomplete="name" placeholder="Nhập họ tên đầy đủ">
-<div class="msg">Em nhớ ghi họ tên trước khi nộp bài nhé.</div>
+<div class="hint">Nhớ ghi tên nha các em, bắt buộc trước khi nộp bài.</div>
+<div class="msg">Em quên ghi tên rồi nè, ghi tên đi rồi nộp bài nha.</div>
 </section>
 
 <div id="exam"></div>
@@ -207,19 +211,19 @@ textarea{width:100%;min-height:96px;font:inherit;font-size:16.5px;padding:10px 1
 
 <section class="card box">
 <h3>Từ vựng em đã gạch chân</h3>
-<p class="sec-sub">Danh sách từ em chưa chắc nghĩa. Bấm dấu × hoặc bấm vào từ đã gạch chân trong đề để bỏ đánh dấu.</p>
+<p class="sec-sub">Mấy từ em chưa chắc nghĩa nằm ở đây, anh sẽ chữa kỹ buổi sau. Lỡ gạch nhầm thì bấm dấu × hoặc bấm lại vào từ đã gạch chân trong đề để bỏ nha.</p>
 <div class="vlist" id="vlist"></div>
 </section>
 
 <section class="card box">
 <h3>Câu em muốn xem lại</h3>
-<p class="sec-sub">Bấm vào số câu em còn phân vân hoặc muốn được chữa kỹ.</p>
+<p class="sec-sub">Câu nào em còn phân vân hoặc muốn anh chữa kỹ thì bấm vào số câu đó nha.</p>
 <div class="flags" id="flags"></div>
 </section>
 
 <section class="card box">
 <h3>Nhắn thêm cho giáo viên</h3>
-<p class="sec-sub">Điều em chưa hiểu hoặc muốn luyện thêm. Không bắt buộc.</p>
+<p class="sec-sub">Em chưa hiểu phần nào hoặc muốn luyện thêm dạng bài nào thì nhắn anh nha (không bắt buộc).</p>
 <textarea id="note" placeholder="Em muốn nhắn..."></textarea>
 </section>
 
@@ -325,7 +329,7 @@ $("plabel").textContent=n+" / "+reg.length+" câu đã làm ("+p+"%)";
 EXAM.parts.forEach(function(pt){
 if(done[pt.id])return;
 var its=reg.filter(function(i){return i.part===pt.id;});
-if(its.length&&its.every(has)){done[pt.id]=1;if(!quiet&&!locked){toast("Em đã làm xong Phần "+pt.id);ting();}}
+if(its.length&&its.every(has)){done[pt.id]=1;if(!quiet&&!locked){toast("Em làm xong Phần "+pt.id);ting();}}
 });
 }
 
@@ -399,9 +403,9 @@ hb.addEventListener("pointerdown",function(e){e.preventDefault();});
 hb.addEventListener("mousedown",function(e){e.preventDefault();});
 hb.addEventListener("click",function(){
 if(!pend)return;
-if(pend.r.cloneContents().querySelector("input,textarea,.mark")){toast("Em chọn một từ hoặc cụm từ ngắn nhé");hideHl();return;}
+if(pend.r.cloneContents().querySelector("input,textarea,.mark")){toast("Em chọn một từ hoặc cụm từ ngắn thôi nha");hideHl();return;}
 var m=document.createElement("span");m.className="mark";m.title="Bấm để bỏ gạch chân";
-try{pend.r.surroundContents(m);}catch(e){toast("Em chọn cụm từ ngắn hơn, trong cùng một dòng nhé");hideHl();return;}
+try{pend.r.surroundContents(m);}catch(e){toast("Em chọn cụm từ ngắn hơn, trong cùng một dòng nha");hideHl();return;}
 if(vocab.indexOf(pend.t)<0)vocab.push(pend.t);
 renderV();window.getSelection().removeAllRanges();hideHl();save();
 });
@@ -492,7 +496,7 @@ var B=$("score");
 B.innerHTML='<div class="big">'+r.sc+' / '+r.tot+'</div><div class="rank">'+rank+'</div>'
 +'<p>'+parts+'</p>'
 +'<p>Lần làm: '+sub.att+'. Thời gian làm bài: '+tmVN(secs)+'. Điểm cao nhất của em: '+best+' / '+r.tot+'.</p>'
-+'<p>Bấm vào số câu để xem lại. Ô viền nét đứt có dấu \u00d7 là câu sai hoặc bỏ trống.</p>'
++'<p>Bấm vào số câu để xem lại nha. Ô viền nét đứt có dấu \u00d7 là câu sai hoặc bỏ trống.</p>'
 +'<div class="rg">'+chips+'</div>'
 +'<table><thead><tr><th>Lần</th><th>Điểm</th><th>Thời gian làm</th><th>Nộp lúc</th></tr></thead><tbody>'+rows+'</tbody></table>'
 +'<p style="margin-top:14px"><button type="button" class="btn" id="retry">Làm lại bài (lần '+(sub.att+1)+')</button></p>';
@@ -603,7 +607,7 @@ answers:body()
 }).then(function(x){return x.json();}).then(function(d){
 if(d&&d.success!==false&&d.success!=="false"){sub.sent=true;save();setStatus("Kết quả đã được gửi cho giáo viên.","good");}
 else throw new Error("fail");
-}).catch(function(){setStatus("Chưa gửi được kết quả. Em kiểm tra mạng rồi bấm gửi lại nhé.","badc",true);});
+}).catch(function(){setStatus("Chưa gửi được kết quả. Em kiểm tra mạng rồi bấm gửi lại nha.","badc",true);});
 }
 
 /* ---------- init ---------- */
